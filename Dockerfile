@@ -1,15 +1,14 @@
 FROM richarvey/nginx-php-fpm:latest
 
 # Install Node.js (v18 or latest LTS)
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs
+# Install Node.js and npm on Alpine
+RUN apk add --no-cache nodejs npm
 
 
 COPY . .
 
 # Install Node dependencies and build assets
-# Install Node.js and npm on Alpine
-RUN apk add --no-cache nodejs npm
+RUN npm install && npm run build
 
 # Image config
 ENV SKIP_COMPOSER 1

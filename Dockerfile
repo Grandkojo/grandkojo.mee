@@ -1,6 +1,14 @@
 FROM richarvey/nginx-php-fpm:latest
 
+# Install Node.js (v18 or latest LTS)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+
+
 COPY . .
+
+# Install Node dependencies and build assets
+RUN npm install && npm run build
 
 # Image config
 ENV SKIP_COMPOSER 1

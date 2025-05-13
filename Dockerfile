@@ -8,7 +8,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
 COPY . .
 
 # Install Node dependencies and build assets
-RUN npm install && npm run build
+# Install Node.js and npm on Alpine
+RUN apk add --no-cache nodejs npm
 
 # Image config
 ENV SKIP_COMPOSER 1

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512"><svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="512" height="512" rx="128" fill="#1B1B18"></rect>
+    <path d="M160 160H352V192H208V256H320V288H208V352H352V384H160V160Z" fill="white"></path>
+    <path d="M160 160H352V192H208V256H320V288H208V352H352V384H160V160Z" fill="url(#gradient)"></path>
+    <defs>
+        <linearGradient id="SvgjsLinearGradient1001" x1="160" y1="160" x2="352" y2="384" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#4F46E5"></stop>
+            <stop offset="1" stop-color="#7C3AED"></stop>
+        </linearGradient>
+    </defs>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

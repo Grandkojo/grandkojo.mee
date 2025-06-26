@@ -55,5 +55,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         'edit' => 'resume.edit',
         'update' => 'resume.update',
         'destroy' => 'resume.destroy',
-    ]);
+    ]); 
 });
+
+Route::post('/send-email', [PortfolioController::class, 'sendEmail'])->name('send.email');

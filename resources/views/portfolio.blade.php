@@ -282,9 +282,9 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($projects as $project)
                 <div class="bg-white dark:bg-[#1a1a1a] rounded-lg overflow-hidden shadow-sm">
-                    @if($project->featured_image)
+                    @if($project->image)
                         <div class="aspect-video bg-[#f5f5f5] dark:bg-[#161615]">
-                            <img src="{{ asset('storage/' . $project->featured_image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover">
+                            <img src="{{ Storage::disk('gcs')->publicUrl($project->image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover">
                         </div>
                     @else
                         <div class="aspect-video bg-[#f5f5f5] dark:bg-[#161615]"></div>
@@ -317,23 +317,47 @@
     <!-- Contact Section -->
     <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8 bg-[#f5f5f5] dark:bg-[#161615]">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold mb-12 text-center">Get in Touch</h2>
+            <h2 class="text-3xl font-bold mb-12 text-center text-[#1b1b18] dark:text-[#EDEDEC]">Get in Touch</h2>
             <div class="max-w-2xl mx-auto">
-                <form class="space-y-6">
+                <!-- Success Message -->
+                <div id="success-message" class="hidden mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-600 dark:text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <p class="text-green-800 dark:text-green-200 font-medium">Email sent successfully! I'll get back to you soon.</p>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="error-message" class="hidden mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-red-600 dark:text-red-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                        </svg>
+                        <p class="text-red-800 dark:text-red-200 font-medium" id="error-text">Something went wrong. Please try again.</p>
+                    </div>
+                </div>
+
+                <form id="contact-form" class="space-y-6" action="{{ route('send.email') }}" method="POST">
+                    @csrf
                     <div>
-                        <label for="name" class="block text-sm font-medium mb-2">Name</label>
-                        <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-lg border border-[#e3e3e0] dark:border-[#3E3E3A] bg-white dark:bg-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1b1b18] dark:focus:ring-[#EDEDEC]">
+                        <label for="name" class="block text-sm font-medium mb-2 text-[#1b1b18] dark:text-[#EDEDEC]">Name</label>
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded-lg border border-[#e3e3e0] dark:border-[#3E3E3A] bg-white dark:bg-[#1a1a1a] text-[#1b1b18] dark:text-[#EDEDEC] focus:outline-none focus:ring-2 focus:ring-[#1b1b18] dark:focus:ring-[#EDEDEC]">
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-lg border border-[#e3e3e0] dark:border-[#3E3E3A] bg-white dark:bg-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1b1b18] dark:focus:ring-[#EDEDEC]">
+                        <label for="email" class="block text-sm font-medium mb-2 text-[#1b1b18] dark:text-[#EDEDEC]">Email</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded-lg border border-[#e3e3e0] dark:border-[#3E3E3A] bg-white dark:bg-[#1a1a1a] text-[#1b1b18] dark:text-[#EDEDEC] focus:outline-none focus:ring-2 focus:ring-[#1b1b18] dark:focus:ring-[#EDEDEC]">
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium mb-2">Message</label>
-                        <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 rounded-lg border border-[#e3e3e0] dark:border-[#3E3E3A] bg-white dark:bg-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#1b1b18] dark:focus:ring-[#EDEDEC]"></textarea>
+                        <label for="message" class="block text-sm font-medium mb-2 text-[#1b1b18] dark:text-[#EDEDEC]">Message</label>
+                        <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 rounded-lg border border-[#e3e3e0] dark:border-[#3E3E3A] bg-white dark:bg-[#1a1a1a] text-[#1b1b18] dark:text-[#EDEDEC] focus:outline-none focus:ring-2 focus:ring-[#1b1b18] dark:focus:ring-[#EDEDEC]"></textarea>
                     </div>
-                    <button type="submit" class="w-full px-6 py-3 bg-[#1b1b18] dark:bg-[#EDEDEC] text-white dark:text-[#1b1b18] rounded-lg hover:opacity-90 transition-opacity">
-                        Send Message
+                    <button type="submit" id="submit-btn" class="w-full px-6 py-3 bg-[#1b1b18] dark:bg-[#EDEDEC] text-white dark:text-[#1b1b18] rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center">
+                        <span id="submit-text">Send Message</span>
+                        <div id="submit-loader" class="hidden ml-2">
+                            <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white dark:border-[#1b1b18]"></div>
+                        </div>
                     </button>
                 </form>
             </div>
@@ -374,48 +398,124 @@
     <!-- Add this before closing body tag -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const slide1 = document.getElementById('slide1');
-            const slide2 = document.getElementById('slide2');
-            let currentSlide = 1;
+            // const slide1 = document.getElementById('slide1');
+            // const slide2 = document.getElementById('slide2');
+            // let currentSlide = 1;
 
-            function switchSlide() {
-                if (currentSlide === 1) {
-                    slide1.style.opacity = '0';
-                    slide2.style.opacity = '1';
-                    currentSlide = 2;
-                } else {
-                    slide1.style.opacity = '1';
-                    slide2.style.opacity = '0';
-                    currentSlide = 1;
-                }
-            }
+            // function switchSlide() {
+            //     if (currentSlide === 1) {
+            //         slide1.style.opacity = '0';
+            //         slide2.style.opacity = '1';
+            //         currentSlide = 2;
+            //     } else {
+            //         slide1.style.opacity = '1';
+            //         slide2.style.opacity = '0';
+            //         currentSlide = 1;
+            //     }
+            // }
 
-            // Switch slides every 5 seconds
-            setInterval(switchSlide, 5000);
+            // // Switch slides every 5 seconds
+            // setInterval(switchSlide, 5000);
 
-            // Add touch swipe functionality
-            let touchStartX = 0;
-            let touchEndX = 0;
+            // // Add touch swipe functionality
+            // let touchStartX = 0;
+            // let touchEndX = 0;
             
-            document.getElementById('imageSlider').addEventListener('touchstart', e => {
-                touchStartX = e.changedTouches[0].screenX;
-            });
+            // document.getElementById('imageSlider').addEventListener('touchstart', e => {
+            //     touchStartX = e.changedTouches[0].screenX;
+            // });
 
-            document.getElementById('imageSlider').addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            });
+            // document.getElementById('imageSlider').addEventListener('touchend', e => {
+            //     touchEndX = e.changedTouches[0].screenX;
+            //     handleSwipe();
+            // });
 
-            function handleSwipe() {
-                const swipeThreshold = 50;
-                if (touchEndX < touchStartX - swipeThreshold) {
-                    // Swipe left
-                    switchSlide();
-                }
-                if (touchEndX > touchStartX + swipeThreshold) {
-                    // Swipe right
-                    switchSlide();
-                }
+            // function handleSwipe() {
+            //     const swipeThreshold = 50;
+            //     if (touchEndX < touchStartX - swipeThreshold) {
+            //         // Swipe left
+            //         switchSlide();
+            //     }
+            //     if (touchEndX > touchStartX + swipeThreshold) {
+            //         // Swipe right
+            //         switchSlide();
+            //     }
+            // }
+
+            // Contact Form AJAX Handling
+            const contactForm = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const submitText = document.getElementById('submit-text');
+            const submitLoader = document.getElementById('submit-loader');
+            const successMessage = document.getElementById('success-message');
+            const errorMessage = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Show loader
+                    submitBtn.disabled = true;
+                    submitText.textContent = 'Sending...';
+                    submitLoader.classList.remove('hidden');
+                    
+                    // Hide any existing messages
+                    successMessage.classList.add('hidden');
+                    errorMessage.classList.add('hidden');
+
+                    // Get form data
+                    const formData = new FormData(contactForm);
+
+                    // Send AJAX request
+                    fetch('{{ route("send.email") }}', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(data => {
+                                throw new Error(data.message || 'Server error');
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Hide loader
+                        submitBtn.disabled = false;
+                        submitText.textContent = 'Send Message';
+                        submitLoader.classList.add('hidden');
+
+                        if (data.success) {
+                            // Show success message
+                            successMessage.classList.remove('hidden');
+                            contactForm.reset();
+                            
+                            // Scroll to success message
+                            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            // Show error message
+                            errorText.textContent = data.message || 'Something went wrong. Please try again.';
+                            errorMessage.classList.remove('hidden');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        
+                        // Hide loader
+                        submitBtn.disabled = false;
+                        submitText.textContent = 'Send Message';
+                        submitLoader.classList.add('hidden');
+                        
+                        // Show error message
+                        errorText.textContent = error.message || 'Network error. Please check your connection and try again.';
+                        errorMessage.classList.remove('hidden');
+                    });
+                });
             }
         });
     </script>

@@ -13,7 +13,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('category');
             $table->integer('proficiency');
-            $table->string('icon')->nullable();
             $table->integer('order')->default(0);
             $table->timestamps();
         });

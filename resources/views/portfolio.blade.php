@@ -282,9 +282,9 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($projects as $project)
                 <div class="bg-white dark:bg-[#1a1a1a] rounded-lg overflow-hidden shadow-sm">
-                    @if($project->image)
+                    @if($project->featured_image)
                         <div class="aspect-video bg-[#f5f5f5] dark:bg-[#161615]">
-                            <img src="{{ Storage::disk('gcs')->publicUrl($project->image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover">
+                            <img src="{{ Storage::disk('gcs')->publicUrl($project->featured_image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover">
                         </div>
                     @else
                         <div class="aspect-video bg-[#f5f5f5] dark:bg-[#161615]"></div>

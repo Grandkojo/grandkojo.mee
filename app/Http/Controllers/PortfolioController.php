@@ -36,7 +36,7 @@ class PortfolioController extends Controller
             Mail::to($request->email)->send(new ContactConfirmation($request->all()));
             
 
-            if ($request->ajax()) {
+            if ($request->expectsJson()) {
                 return response()->json([
                     'success' => true,
                     'message' => 'Email sent successfully'
@@ -45,7 +45,7 @@ class PortfolioController extends Controller
 
             return redirect()->back()->with('success', 'Email sent successfully');
         } catch (\Illuminate\Validation\ValidationException $e) {
-            if ($request->ajax()) {
+            if ($request->expectsJson()) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Please check your input and try again.',
@@ -55,7 +55,7 @@ class PortfolioController extends Controller
 
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
-            if ($request->ajax()) {
+            if ($request->expectsJson()) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Failed to send email. Please try again.',

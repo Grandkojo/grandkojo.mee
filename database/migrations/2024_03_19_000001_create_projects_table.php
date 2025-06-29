@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->json('technologies');
-            $table->string('image')->nullable();
+            $table->string('featured_image')->nullable();
             $table->string('project_url')->nullable();
             $table->string('github_url')->nullable();
             $table->boolean('is_featured')->default(false);

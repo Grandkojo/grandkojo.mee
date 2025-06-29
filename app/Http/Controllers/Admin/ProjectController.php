@@ -35,9 +35,9 @@ class ProjectController extends Controller
         // Convert technologies string to array
         $validated['technologies'] = array_map('trim', explode(',', $validated['technologies']));
 
-        if ($request->hasFile('featured_image')) {
-            $path = $request->file('featured_image')->store('projects', 'public');
-            $validated['featured_image'] = $path;
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('projects', 'public');
+            $validated['image'] = $path;
         }
 
         Project::create($validated);

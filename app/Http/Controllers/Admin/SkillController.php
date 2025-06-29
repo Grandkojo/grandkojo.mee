@@ -52,18 +52,8 @@ class SkillController extends Controller
             'name' => 'required|max:255',
             'category' => 'required|in:Frontend,Backend,Database,DevOps,Tools',
             'proficiency' => 'required|integer|min:0|max:100',
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
             'order' => 'nullable|integer|min:0',
         ]);
-
-        if ($request->hasFile('icon')) {
-            // Delete old icon if exists
-            if ($skill->icon) {
-                Storage::disk('public')->delete($skill->icon);
-            }
-            $path = $request->file('icon')->store('skills', 'public');
-            $validated['icon'] = $path;
-        }
 
         $skill->update($validated);
 
@@ -73,10 +63,6 @@ class SkillController extends Controller
 
     public function destroy(Skill $skill)
     {
-        // Delete icon file if exists
-        if ($skill->icon) {
-            Storage::disk('public')->delete($skill->icon);
-        }
         
         $skill->delete();
 

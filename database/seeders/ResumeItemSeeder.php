@@ -26,7 +26,7 @@ class ResumeItemSeeder extends Seeder
         ]);
 
         ResumeItem::create([
-            'type' => 'education',
+            'type' => 'certification',
             'title' => 'ALX Software Engineering',
             'organization' => 'ALX Foundations',
             'location' => null,
@@ -37,7 +37,7 @@ class ResumeItemSeeder extends Seeder
         ]);
 
         ResumeItem::create([
-            'type' => 'education',
+            'type' => 'certification',
             'title' => 'AWS RE/START',
             'organization' => 'Amalitech',
             'location' => null,

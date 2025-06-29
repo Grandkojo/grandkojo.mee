@@ -29,7 +29,7 @@ class ContactForm extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Contact Form Message from ' . $this->data['name'],
+            subject: 'New Contact Form Message from ' . ($this->data['name'] ?? ''),
         );
     }
 

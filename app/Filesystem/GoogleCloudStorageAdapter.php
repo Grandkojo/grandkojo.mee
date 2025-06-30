@@ -26,16 +26,43 @@ class GoogleCloudStorageAdapter implements FilesystemAdapter, PublicUrlGenerator
     {
         $this->bucketName = $config['bucket'];
         
-        // Resolve relative path to absolute path
-        $keyFilePath = $config['key_file'];
-        if (!file_exists($keyFilePath) && !str_starts_with($keyFilePath, '/')) {
-            $keyFilePath = base_path($keyFilePath);
+        // Handle both file paths and JSON strings
+        $keyFile = $config['key_file'] ?? null;
+        $credentials = $config['credentials'] ?? null;
+        
+        $clientConfig = [
+            'projectId' => $config['project_id'],
+        ];
+        
+        if ($keyFile) {
+            // Resolve relative path to absolute path
+            if (!file_exists($keyFile) && !str_starts_with($keyFile, '/')) {
+                $keyFile = base_path($keyFile);
+            }
+            $clientConfig['keyFilePath'] = $keyFile;
+        } elseif ($credentials) {
+            // Check if credentials is a JSON string (starts with {)
+            if (str_starts_with(trim($credentials), '{')) {
+                // Handle JSON string from environment
+                $clientConfig['keyFile'] = json_decode($credentials, true);
+            } elseif (str_starts_with(trim($credentials), 'eyJ')) {
+                // Handle base64 encoded JSON
+                $decoded = base64_decode($credentials);
+                if ($decoded && str_starts_with(trim($decoded), '{')) {
+                    $clientConfig['keyFile'] = json_decode($decoded, true);
+                } else {
+                    throw new \InvalidArgumentException('Invalid base64 encoded JSON credentials');
+                }
+            } else {
+                // Treat as file path
+                if (!file_exists($credentials) && !str_starts_with($credentials, '/')) {
+                    $credentials = base_path($credentials);
+                }
+                $clientConfig['keyFilePath'] = $credentials;
+            }
         }
         
-        $this->storageClient = new StorageClient([
-            'projectId' => $config['project_id'],
-            'keyFilePath' => $keyFilePath,
-        ]);
+        $this->storageClient = new StorageClient($clientConfig);
         
         $this->bucket = $this->storageClient->bucket($this->bucketName);
     }

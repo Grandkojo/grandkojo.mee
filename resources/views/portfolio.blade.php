@@ -151,13 +151,16 @@
             <div class="max-w-3xl mx-auto">
                 <div class="bg-[#1a1a1a] dark:bg-[#0a0a0a] rounded-xl shadow-sm border border-[#3E3E3A] dark:border-[#3E3E3A] p-8 mb-12">
                     <p class="text-lg text-[#706f6c] dark:text-[#A1A09A] mb-6">
-                        I am Ernest Kojo Owusu Essien, a final year Computer Engineering student at Kwame Nkrumah University of Science and Technology in Ghana. I am a passionate software developer with a keen eye for creating elegant solutions to complex problems. With a strong foundation in both frontend and backend development, I strive to build applications that are not only functional but also provide an exceptional user experience.
+                        <!-- I am Ernest Kojo Owusu Essien, a final year Computer Engineering student at Kwame Nkrumah University of Science and Technology in Ghana. I am a passionate software developer with a keen eye for creating elegant solutions to complex problems. With a strong foundation in both frontend and backend development, I strive to build applications that are not only functional but also provide an exceptional user experience. -->
+                        I'm Ernest Kojo Owusu Essien — a final-year Computer Engineering student at KNUST with a strong passion for building impactful software products. With experience across both frontend and backend development, I enjoy creating clean, intuitive, and scalable solutions to real-world problems.
                     </p>
                     <p class="text-lg text-[#706f6c] dark:text-[#A1A09A] mb-6">
-                        My journey in software development has been driven by a constant desire to learn and adapt to new technologies. I believe in writing clean, maintainable code and following best practices to ensure the longevity and scalability of every project I work on.
+                        <!-- My journey in software development has been driven by a constant desire to learn and adapt to new technologies. I believe in writing clean, maintainable code and following best practices to ensure the longevity and scalability of every project I work on. -->
+                        Over the past few years, I've built everything from internal tools for team productivity to open-source UI components and machine learning-powered web apps. My approach blends curiosity with practical engineering — I care about writing maintainable code, optimizing for performance, and building for real users.
                     </p>
                     <p class="text-lg text-[#706f6c] dark:text-[#A1A09A]">
-                        When I'm not coding, you can find me exploring new technologies, mentoring, contributing to open-source projects, or sharing my knowledge with the developer community. I'm always excited to take on new challenges and collaborate with like-minded individuals.
+                        <!-- When I'm not coding, you can find me exploring new technologies, mentoring, contributing to open-source projects, or sharing my knowledge with the developer community. I'm always excited to take on new challenges and collaborate with like-minded individuals. -->
+                        When I'm not coding, I'm mentoring, contributing to open source, or sharing lessons from my learning journey. I thrive in collaborative spaces and love working on projects that push me to grow technically and creatively.
                     </p>
                 </div>
             </div>

@@ -36,6 +36,7 @@
                     <a href="#about" class="text-sm hover:text-[#706f6c] dark:hover:text-[#A1A09A] transition-colors">About</a>
                     <a href="#resume" class="text-sm hover:text-[#706f6c] dark:hover:text-[#A1A09A] transition-colors">Resume</a>
                     <a href="#projects" class="text-sm hover:text-[#706f6c] dark:hover:text-[#A1A09A] transition-colors">Projects</a>
+                    {{-- <a href="{{ route('blog.index') }}" class="text-sm hover:text-[#706f6c] dark:hover:text-[#A1A09A] transition-colors">Blog</a> --}}
                     <a href="#contact" class="text-sm hover:text-[#706f6c] dark:hover:text-[#A1A09A] transition-colors">Contact</a>
                 </div>
 
@@ -68,6 +69,7 @@
                     <a href="#about" class="block px-3 py-2 text-base font-medium text-[#1b1b18] dark:text-[#EDEDEC] hover:text-[#706f6c] dark:hover:text-[#A1A09A] transition-colors">About</a>
                     <a href="#resume" class="block px-3 py-2 text-base font-medium text-[#1b1b18] dark:text-[#EDEDEC] hover:text-[#706f6c] dark:hover:text-[#A1A09A] transition-colors">Resume</a>
                     <a href="#projects" class="block px-3 py-2 text-base font-medium text-[#1b1b18] dark:text-[#EDEDEC] hover:text-[#706f6c] dark:hover:text-[#A1A09A] transition-colors">Projects</a>
+                    {{-- <a href="{{ route('blog.index') }}" class="block px-3 py-2 text-base font-medium text-[#1b1b18] dark:text-[#EDEDEC] hover:text-[#706f6c] dark:hover:text-[#A1A09A] transition-colors">Blog</a> --}}
                     <a href="#contact" class="block px-3 py-2 text-base font-medium text-[#1b1b18] dark:text-[#EDEDEC] hover:text-[#706f6c] dark:hover:text-[#A1A09A] transition-colors">Contact</a>
                 </div>
             </div>
@@ -152,15 +154,19 @@
                 <div class="bg-[#1a1a1a] dark:bg-[#0a0a0a] rounded-xl shadow-sm border border-[#3E3E3A] dark:border-[#3E3E3A] p-8 mb-12">
                     <p class="text-lg text-[#706f6c] dark:text-[#A1A09A] mb-6">
                         <!-- I am Ernest Kojo Owusu Essien, a final year Computer Engineering student at Kwame Nkrumah University of Science and Technology in Ghana. I am a passionate software developer with a keen eye for creating elegant solutions to complex problems. With a strong foundation in both frontend and backend development, I strive to build applications that are not only functional but also provide an exceptional user experience. -->
-                        I'm Ernest Kojo Owusu Essien — a final-year Computer Engineering student at KNUST with a strong passion for building impactful software products. With experience across both frontend and backend development, I enjoy creating clean, intuitive, and scalable solutions to real-world problems.
+                        <!--I'm Ernest Kojo Owusu Essien — a final-year Computer Engineering student at KNUST with a strong passion for building impactful software products. With experience across both frontend and backend development, I enjoy creating clean, intuitive, and scalable solutions to real-world problems. -->
+
+                        Ernest Kojo Owusu Essien — a fresh KNUST Computer Engineering graduate now shipping production-grade software that powers real businesses and communities. From full-stack e-commerce platforms like ZonifyCart to AI-driven internal tools and open-source contributions, I build clean, scalable solutions that solve Ghanaian problems first and scale globally.
                     </p>
                     <p class="text-lg text-[#706f6c] dark:text-[#A1A09A] mb-6">
                         <!-- My journey in software development has been driven by a constant desire to learn and adapt to new technologies. I believe in writing clean, maintainable code and following best practices to ensure the longevity and scalability of every project I work on. -->
-                        Over the past few years, I've built everything from internal tools for team productivity to open-source UI components and machine learning-powered web apps. My approach blends curiosity with practical engineering — I care about writing maintainable code, optimizing for performance, and building for real users.
+                        <!--Over the past few years, I've built everything from internal tools for team productivity to open-source UI components and machine learning-powered web apps. My approach blends curiosity with practical engineering — I care about writing maintainable code, optimizing for performance, and building for real users.-->
+                        I bring battle-tested skills in Python/Django, Laravel, React, Vue, and cloud deployment, backed by hands-on wins at PyCon Ghana, GDG DevFest contributions, and internships where I turned ideas into live products. I write code that lasts, optimize for performance under real constraints, and design experiences users actually love.
                     </p>
                     <p class="text-lg text-[#706f6c] dark:text-[#A1A09A]">
                         <!-- When I'm not coding, you can find me exploring new technologies, mentoring, contributing to open-source projects, or sharing my knowledge with the developer community. I'm always excited to take on new challenges and collaborate with like-minded individuals. -->
-                        When I'm not coding, I'm mentoring, contributing to open source, or sharing lessons from my learning journey. I thrive in collaborative spaces and love working on projects that push me to grow technically and creatively.
+                        <!--When I'm not coding, I'm mentoring, contributing to open source, or sharing lessons from my learning journey. I thrive in collaborative spaces and love working on projects that push me to grow technically and creatively.-->
+                        Now fully graduated and hungry, I'm mentoring emerging devs, growing Scratchcode Academy, and hunting the next big challenge—whether that's joining a world-class team or scaling the next unicorn out of West Africa. Let's build something legendary. 🇬🇭🚀
                     </p>
                 </div>
             </div>
@@ -287,7 +293,8 @@
                 <div class="bg-white dark:bg-[#1a1a1a] rounded-lg overflow-hidden shadow-sm">
                     @if($project->featured_image)
                         <div class="aspect-video bg-[#f5f5f5] dark:bg-[#161615]">
-                            <img src="{{ Storage::disk('gcs')->publicUrl($project->featured_image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover">
+                             <!--<img src="{{ Storage::disk('gcs')->publicUrl($project->featured_image) ?? asset('images/image-placeholder.jpg') }}" alt="{{ $project->title }}" class="w-full h-full object-cover"> -->
+                            <img src="{{ asset('images/image-placeholder.jpg') }}" alt="{{ $project->title }}" class="w-full h-full object-cover">
                         </div>
                     @else
                         <div class="aspect-video bg-[#f5f5f5] dark:bg-[#161615]"></div>

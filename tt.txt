@@ -1,0 +1,19 @@
+<div class="highlight-box">
+    <h2>Django Custom Permissions</h2>
+    <p>
+    Wanted to ever create specific permissions to a group of users easily? This guide would help you get started. We would create a simple blog post application, where we'd have two users, an editor and a user, assign permissions to them, where the editor in this case, is the only one who can delete `published` post of users.
+   </p>
+    </div>
+   <h1>Why ever setup custom permissions?</h1>
+   <div class="mb-6">
+    <div class="grid md:grid-cols-2 gap-3">
+     <div class="bg-white dark:bg-slate-800 p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-slate-200 dark:border-slate-700">
+      <h4 class="font-semibold text-slate-900 dark:text-white mb-1.5 text-base">Application Requirements</h4>
+      <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">You need to implement a feature that Django's built-in permissions system doesn't handle by default, requiring custom permission logic.</p>
+     </div>
+     <div class="bg-white dark:bg-slate-800 p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow border border-slate-200 dark:border-slate-700">
+      <h4 class="font-semibold text-slate-900 dark:text-white mb-1.5 text-base">Granular Control</h4>
+      <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">You need fine-grained permission control where users can perform specific actions on specific objects, like allowing editors to delete only published posts from certain users.</p>
+     </div>
+    </div>
+   </div>

@@ -33,7 +33,7 @@ class ProjectSeeder extends Seeder
         ]);
         Project::create([
             'title' => 'ZonifyCart',
-            'description' => 'A modern ecommerce platform built with Django and React. Stay tuned!',
+            'description' => 'A modern ecommerce platform built with Django and React. For local creatives to gain a wider audience to purchase their designs',
             'technologies' => ['Django', 'React', 'PostgreSQL', 'Tailwind CSS'],
             'project_url' => '',
             'github_url' => 'https://github.com/Grandkojo/ZonifyCart.git',

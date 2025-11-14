@@ -87,6 +87,26 @@
                     </div>
                 </div>
 
+                <!-- Demo URL (YouTube) -->
+                <div>
+                    <label for="demo_url" class="block text-sm font-medium text-[#706f6c] dark:text-[#A1A09A] mb-2">Demo Video URL (YouTube)</label>
+                    <div class="relative">
+                        <input type="url" name="demo_url" id="demo_url" value="{{ old('demo_url', $project->demo_url ?? '') }}"
+                            class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-[#e3e3e0] dark:border-[#3E3E3A] bg-white dark:bg-[#1a1a1a] text-[#1b1b18] dark:text-[#EDEDEC] focus:outline-none focus:ring-2 focus:ring-[#1b1b18] dark:focus:ring-[#EDEDEC] transition-colors"
+                            placeholder="https://www.youtube.com/watch?v=...">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-[#706f6c] dark:text-[#A1A09A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-xs text-[#706f6c] dark:text-[#A1A09A]">Enter a YouTube video URL for the project demo</p>
+                    @error('demo_url')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Featured Image -->
                 <div>
                     <label for="featured_image" class="block text-sm font-medium text-[#706f6c] dark:text-[#A1A09A] mb-2">Featured Image</label>

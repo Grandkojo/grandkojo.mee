@@ -19,3 +19,175 @@
         scroll-behavior: smooth;
     }
 }
+
+@layer utilities {
+    /* Fade in animations */
+    .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .fade-in-up {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    /* Gradient shift animation */
+    @keyframes animate-gradient-shift {
+        0%, 100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    .animate-gradient-shift {
+        background-size: 200% 200%;
+        animation: animate-gradient-shift 15s ease infinite;
+    }
+
+    /* Parallax layers */
+    .parallax-layer-1 {
+        transform: translateZ(0);
+        will-change: transform;
+    }
+
+    .parallax-layer-2 {
+        transform: translateZ(0);
+        will-change: transform;
+    }
+
+    .parallax-layer-3 {
+        transform: translateZ(0);
+        will-change: transform;
+    }
+
+    /* Keyframes */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Glassmorphism utilities */
+    .glass {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-dark {
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(10, 10, 10, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Smooth transitions for project cards */
+    .project-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Timeline item animations */
+    .timeline-item {
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: all 0.6s ease-out;
+    }
+
+    .timeline-item.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Dynamic Island animations */
+    #dynamic-island {
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-focus-ring-color: transparent;
+        isolation: isolate;
+        contain: layout style paint;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+    
+    /* Prevent selection highlighting */
+    #dynamic-island::selection,
+    #dynamic-island *::selection {
+        background: transparent;
+    }
+    
+    #dynamic-island::-moz-selection,
+    #dynamic-island *::-moz-selection {
+        background: transparent;
+    }
+
+    #dynamic-island:hover {
+        transform: scale(1.02);
+    }
+
+    #dynamic-island:focus,
+    #dynamic-island:focus-visible {
+        outline: none !important;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    /* Prevent any box rendering artifacts */
+    #dynamic-island * {
+        outline: none !important;
+    }
+
+    /* Hamburger animation improvements */
+    #hamburger-line-1,
+    #hamburger-line-2,
+    #hamburger-line-3 {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Mobile menu spring animation */
+    @keyframes menuSlideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    #menu-content.animate-in {
+        animation: menuSlideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    /* Responsive adjustments for dynamic island */
+    @media (max-width: 640px) {
+        #dynamic-island {
+            max-width: calc(100vw - 2rem);
+        }
+    }
+}

@@ -15,6 +15,7 @@ class Project extends Model
         'technologies',
         'project_url',
         'github_url',
+        'demo_url',
         'featured_image',
         'order'
     ];

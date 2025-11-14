@@ -21,6 +21,13 @@ class SkillSeeder extends Seeder
         ]);
 
         Skill::create([
+            'name' => 'AWS',
+            'category' => 'DevOps',
+            'proficiency' => 75,
+            'order' => 0,
+        ]);
+
+        Skill::create([
             'name' => 'React',
             'category' => 'Frontend',
             'proficiency' => 60,

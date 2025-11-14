@@ -10,6 +10,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 
 Route::get('/', [PortfolioController::class, 'index'])->name('portfolio');
+Route::get('/projects/{project}', [PortfolioController::class, 'showProject'])->name('project.show');
 
 // Blog Routes
 Route::prefix('blog')->name('blog.')->group(function () {

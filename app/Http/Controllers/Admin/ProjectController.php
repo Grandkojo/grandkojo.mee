@@ -28,6 +28,7 @@ class ProjectController extends Controller
             'technologies' => 'required|string',
             'project_url' => 'nullable|url',
             'github_url' => 'nullable|url',
+            'demo_url' => 'nullable|url',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'order' => 'nullable|integer|min:0',
         ]);
@@ -35,9 +36,12 @@ class ProjectController extends Controller
         // Convert technologies string to array
         $validated['technologies'] = array_map('trim', explode(',', $validated['technologies']));
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('projects', 'public');
-            $validated['image'] = $path;
+        if ($request->hasFile('featured_image')) {
+            // Store image in project-imgs folder and save only the filename
+            $file = $request->file('featured_image');
+            $filename = $file->getClientOriginalName();
+            $file->move(public_path('project-imgs'), $filename);
+            $validated['featured_image'] = $filename;
         }
 
         Project::create($validated);
@@ -59,6 +63,7 @@ class ProjectController extends Controller
             'technologies' => 'required|string',
             'project_url' => 'nullable|url',
             'github_url' => 'nullable|url',
+            'demo_url' => 'nullable|url',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'order' => 'nullable|integer|min:0',
         ]);
@@ -69,13 +74,18 @@ class ProjectController extends Controller
         if ($request->hasFile('featured_image')) {
             // Delete old image if exists
             if ($project->featured_image) {
-                Storage::disk('public')->delete($project->featured_image);
+                $oldImagePath = public_path('project-imgs/' . $project->featured_image);
+                if (file_exists($oldImagePath)) {
+                    @unlink($oldImagePath);
+                }
             }
-            $path = $request->file('featured_image')->store('projects', 'public');
-            $validated['featured_image'] = $path;
+            $file = $request->file('featured_image');
+            $filename = $file->getClientOriginalName();
+            $file->move(public_path('project-imgs'), $filename);
+            $validated['featured_image'] = $filename;
         }
 
-        $project->update($validated);
+        $project->update($validated);   
 
         return redirect()->route('admin.projects.index')
             ->with('success', 'Project updated successfully.');
@@ -85,7 +95,11 @@ class ProjectController extends Controller
     {
         // Delete featured image if exists
         if ($project->featured_image) {
-            Storage::disk('public')->delete($project->featured_image);
+            $oldImagePath = public_path('project-imgs/' . $project->featured_image);
+                if (file_exists($oldImagePath)) {
+                    @unlink($oldImagePath);
+                }
+            // Storage::disk('public')->delete($project->featured_image);
         }
         
         $project->delete();

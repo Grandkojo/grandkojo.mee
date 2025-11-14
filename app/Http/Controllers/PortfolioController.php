@@ -21,6 +21,14 @@ class PortfolioController extends Controller
         return view('portfolio', compact('skills', 'projects', 'resumeItems'));
     }
 
+    public function showProject($id)
+    {
+        $project = Project::findOrFail($id);
+        $projects = Project::orderBy('order')->get();
+        
+        return view('projects.show', compact('project', 'projects'));
+    }
+
     public function sendEmail(Request $request)
     {
         try {

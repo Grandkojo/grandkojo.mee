@@ -1,4 +1,5 @@
 import './bootstrap';
+import './common';
 
 // Scroll-triggered animations and parallax effects
 document.addEventListener('DOMContentLoaded', function() {

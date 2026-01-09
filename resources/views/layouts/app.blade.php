@@ -39,7 +39,7 @@
     <link rel="canonical" href="{{ url()->current() }}">
 
     <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/common.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     @stack('styles')
 </head>

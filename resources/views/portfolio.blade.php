@@ -1,212 +1,9 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Portfolio of Ernest Kojo Owusu Essien - Software Developer">
+@extends('layouts.app')
 
-    <title>Grandkojo | Portfolio</title>
+@section('title', 'Grandkojo | Portfolio')
+@section('meta_description', 'Portfolio of Ernest Kojo Owusu Essien - Software Developer')
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-96x96.png') }}" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon/favicon.svg') }}" />
-    <link rel="shortcut icon" href="{{ asset('favicon/favicon.ico') }}" />
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}" />
-    <link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}" />
-
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
-    <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] dark:text-[#EDEDEC] overflow-x-hidden">
-    <!-- Animated Background Layers -->
-    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-purple-500/5 to-teal-500/5 animate-gradient-shift"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(6,182,212,0.1),transparent_50%)] parallax-layer-1"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(168,85,247,0.1),transparent_50%)] parallax-layer-2"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(20,184,166,0.08),transparent_60%)] parallax-layer-3"></div>
-    </div>
-
-    <!-- Dynamic Island Navigation -->
-    <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-auto px-4">
-        <!-- Dynamic Island Container -->
-        <div id="dynamic-island" class="backdrop-blur-xl bg-white/10 dark:bg-[#0a0a0a]/40 border border-white/20 dark:border-white/20 rounded-full shadow-2xl shadow-black/20 overflow-hidden" style="outline: none !important; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); -webkit-tap-highlight-color: transparent; -webkit-focus-ring-color: transparent; will-change: opacity;">
-            <!-- Mobile: Compact State -->
-            <div id="mobile-nav" class="md:hidden flex items-center justify-between px-4 py-2.5 min-w-[140px]">
-                <a href="{{ route('portfolio') }}" class="text-sm font-semibold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity">Grandkojo</a>
-                <button type="button" id="mobile-menu-button" class="ml-3 p-2 rounded-full hover:bg-white/10 dark:hover:bg-white/10 transition-all group active:scale-95">
-                    <div class="w-5 h-5 relative">
-                        <span id="hamburger-line-1" class="absolute top-0 left-0 w-full h-0.5 bg-[#1b1b18] dark:bg-[#EDEDEC] rounded-full transition-all duration-300 group-hover:bg-cyan-400 origin-center"></span>
-                        <span id="hamburger-line-2" class="absolute top-2 left-0 w-full h-0.5 bg-[#1b1b18] dark:bg-[#EDEDEC] rounded-full transition-all duration-300 group-hover:bg-cyan-400 origin-center"></span>
-                        <span id="hamburger-line-3" class="absolute top-4 left-0 w-full h-0.5 bg-[#1b1b18] dark:bg-[#EDEDEC] rounded-full transition-all duration-300 group-hover:bg-cyan-400 origin-center"></span>
-                    </div>
-                </button>
-            </div>
-
-            <!-- Desktop: Expanded State -->
-            <div id="desktop-nav" class="hidden md:flex items-center space-x-1 px-6 py-3">
-                <a href="{{ route('portfolio') }}" class="text-sm font-semibold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mr-2 hover:opacity-80 transition-opacity">Grandkojo</a>
-                <div class="h-4 w-px bg-white/20 mx-2"></div>
-                <a href="#about" class="px-4 py-2 text-sm hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors rounded-full hover:bg-white/5 dark:hover:bg-white/5 relative group">
-                    About
-                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-3/4 transition-all duration-300 rounded-full"></span>
-                </a>
-                <a href="#resume" class="px-4 py-2 text-sm hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors rounded-full hover:bg-white/5 dark:hover:bg-white/5 relative group">
-                    Resume
-                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-3/4 transition-all duration-300 rounded-full"></span>
-                </a>
-                <a href="#projects" class="px-4 py-2 text-sm hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors rounded-full hover:bg-white/5 dark:hover:bg-white/5 relative group">
-                    Projects
-                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-3/4 transition-all duration-300 rounded-full"></span>
-                </a>
-                <a href="#contact" class="px-4 py-2 text-sm hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors rounded-full hover:bg-white/5 dark:hover:bg-white/5 relative group">
-                    Contact
-                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-3/4 transition-all duration-300 rounded-full"></span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-40">
-            <!-- Dark overlay -->
-            <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300" id="menu-overlay"></div>
-            
-            <!-- Menu content - Dynamic Island Style -->
-            <div class="relative flex justify-center pt-20">
-                <div id="menu-content" class="backdrop-blur-xl bg-white/10 dark:bg-[#0a0a0a]/40 border border-white/20 dark:border-white/20 rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 scale-95 opacity-0 max-w-[280px] w-full mx-4">
-                    <div class="px-6 py-5 space-y-1">
-                        <a href="#about" class="block px-4 py-3 text-base font-medium text-[#1b1b18] dark:text-[#EDEDEC] hover:text-cyan-400 rounded-xl hover:bg-white/5 dark:hover:bg-white/5 transition-all transform hover:scale-[1.02]">About</a>
-                        <a href="#resume" class="block px-4 py-3 text-base font-medium text-[#1b1b18] dark:text-[#EDEDEC] hover:text-cyan-400 rounded-xl hover:bg-white/5 dark:hover:bg-white/5 transition-all transform hover:scale-[1.02]">Resume</a>
-                        <a href="#projects" class="block px-4 py-3 text-base font-medium text-[#1b1b18] dark:text-[#EDEDEC] hover:text-cyan-400 rounded-xl hover:bg-white/5 dark:hover:bg-white/5 transition-all transform hover:scale-[1.02]">Projects</a>
-                        <a href="#contact" class="block px-4 py-3 text-base font-medium text-[#1b1b18] dark:text-[#EDEDEC] hover:text-cyan-400 rounded-xl hover:bg-white/5 dark:hover:bg-white/5 transition-all transform hover:scale-[1.02]">Contact</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Dynamic Island JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuContent = document.getElementById('menu-content');
-            const menuOverlay = document.getElementById('menu-overlay');
-            const dynamicIsland = document.getElementById('dynamic-island');
-            const hamburgerLine1 = document.getElementById('hamburger-line-1');
-            const hamburgerLine2 = document.getElementById('hamburger-line-2');
-            const hamburgerLine3 = document.getElementById('hamburger-line-3');
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-            let isMenuOpen = false;
-
-            function closeMenu() {
-                if (!isMenuOpen) return;
-                isMenuOpen = false;
-                
-                // Close menu
-                menuContent.style.transition = 'all 0.3s ease-in';
-                menuContent.style.transform = 'scale(0.95)';
-                menuContent.style.opacity = '0';
-                
-                // Reset hamburger animation properly - remove inline styles to restore Tailwind classes
-                hamburgerLine1.style.removeProperty('transform');
-                hamburgerLine1.style.removeProperty('top');
-                hamburgerLine2.style.removeProperty('opacity');
-                hamburgerLine2.style.removeProperty('transform');
-                hamburgerLine3.style.removeProperty('transform');
-                hamburgerLine3.style.removeProperty('top');
-                
-                // Reset dynamic island - remove inline styles
-                dynamicIsland.style.removeProperty('width');
-                dynamicIsland.style.removeProperty('min-width');
-                
-                setTimeout(() => {
-                    mobileMenu.classList.add('hidden');
-                    document.body.style.overflow = '';
-                }, 300);
-            }
-
-            function openMenu() {
-                if (isMenuOpen) return;
-                isMenuOpen = true;
-                
-                // Open menu
-                mobileMenu.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-                
-                // Animate hamburger to X with smooth transition
-                setTimeout(() => {
-                    hamburgerLine1.style.transform = 'rotate(45deg) translateY(8px)';
-                    hamburgerLine1.style.top = '8px';
-                    hamburgerLine2.style.opacity = '0';
-                    hamburgerLine2.style.transform = 'scaleX(0)';
-                    hamburgerLine3.style.transform = 'rotate(-45deg) translateY(-8px)';
-                    hamburgerLine3.style.top = '8px';
-                }, 10);
-                
-                // Expand dynamic island with smooth animation
-                dynamicIsland.style.width = 'auto';
-                dynamicIsland.style.minWidth = '140px';
-                
-                // Animate menu content with spring-like effect
-                requestAnimationFrame(() => {
-                    menuContent.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                    menuContent.style.transform = 'scale(1)';
-                    menuContent.style.opacity = '1';
-                });
-            }
-
-            function toggleMenu() {
-                if (isMenuOpen) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
-            }
-
-            mobileMenuButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleMenu();
-            });
-
-            // Close menu when clicking overlay
-            menuOverlay.addEventListener('click', closeMenu);
-            
-            // Close menu when clicking outside the menu content
-            mobileMenu.addEventListener('click', (e) => {
-                // Don't close if clicking on menu content or hamburger button
-                const clickedOnMenuContent = e.target.closest('#menu-content');
-                const clickedOnButton = e.target.closest('#mobile-menu-button');
-                
-                if (!clickedOnMenuContent && !clickedOnButton) {
-                    closeMenu();
-                }
-            });
-
-            // Close menu when clicking a link
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    closeMenu();
-                });
-            });
-            
-            // Close menu on escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && isMenuOpen) {
-                    closeMenu();
-                }
-            });
-
-            // Dynamic island scroll effect - disabled to prevent rendering artifacts
-            // The dynamic island will remain static during scroll to avoid any visual glitches
-        });
-    </script>
-
+@section('content')
     <!-- Hero Section -->
     <section class="pt-32 md:pt-36 pb-16 px-4 sm:px-6 lg:px-8 relative">
         <div class="max-w-7xl mx-auto">
@@ -229,8 +26,8 @@
                 <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-teal-400 bg-clip-text text-transparent fade-in-up">Ernest Kojo Owusu Essien</h1>
                 <p class="text-xl text-[#706f6c] dark:text-[#A1A09A] mb-8 fade-in-up">Software Engineer & Problem Solver</p>
                 <div class="flex justify-center space-x-4 fade-in-up">
-                    <a href="#contact" class="px-6 py-3 backdrop-blur-md bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all transform hover:scale-105">Get in Touch</a>
-                    <a href="#projects" class="px-6 py-3 backdrop-blur-md bg-white/5 dark:bg-white/5 border border-white/10 dark:border-white/10 rounded-lg hover:bg-white/10 dark:hover:bg-white/10 transition-all transform hover:scale-105">View Projects</a>
+                    <a href="#contact" class="px-6 py-3 backdrop-blur-md bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all transform hover:scale-100">Get in Touch</a>
+                    <a href="#projects" class="px-6 py-3 backdrop-blur-md bg-white/5 dark:bg-white/5 border border-white/10 dark:border-white/10 rounded-lg hover:bg-white/10 dark:hover:bg-white/10 transition-all transform hover:scale-100">View Projects</a>
                 </div>
             </div>
         </div>
@@ -387,13 +184,12 @@
     <section id="projects" class="py-16 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent fade-in">Featured Projects</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($projects as $index => $project)
-                <a href="{{ route('project.show', $project->id) }}" class="group project-card fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
-                    <div class="backdrop-blur-md bg-white/5 dark:bg-white/5 rounded-2xl overflow-hidden border border-white/10 dark:border-white/10 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 h-full flex flex-col">
+                    <div class="backdrop-blur-md bg-white/5 dark:bg-white/5 rounded-2xl overflow-hidden border border-white/10 dark:border-white/10 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 transform hover:scale-100 hover:-translate-y-2 h-full flex flex-col group project-card fade-in-up" style="animation-delay: {{ $index * 0.1 }}s" onclick="window.location.href='{{ route('project.show', $project->id) }}'">
                         @if($project->featured_image)
                             <div class="aspect-video bg-gradient-to-br from-cyan-500/10 to-purple-500/10 overflow-hidden relative">
-                                <img src="{{ asset('images/project-imgs/' . $project->featured_image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <img src="{{ asset('images/project-imgs/' . $project->featured_image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover group-hover:scale-100 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                         @else
@@ -447,7 +243,6 @@
                             </div>
                         </div>
                     </div>
-                </a>
                 @endforeach
             </div>
         </div>
@@ -479,8 +274,9 @@
                 </div>
 
                 <div class="backdrop-blur-md bg-white/5 dark:bg-white/5 rounded-2xl shadow-xl border border-white/10 dark:border-white/10 p-8 fade-in-up">
-                    <form id="contact-form" class="space-y-6" action="{{ route('send.email') }}" method="POST">
+                    <form id="contact-form" class="space-y-6" action="https://api.web3forms.com/submit" method="POST">
                         @csrf
+                        <input type="hidden" name="access_key" value="fdbd9bb1-f8ed-4577-9370-e3d0ed7fa03f">
                         <div>
                             <label for="name" class="block text-sm font-medium mb-2 text-[#1b1b18] dark:text-[#EDEDEC]">Name</label>
                             <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg backdrop-blur-sm bg-white/5 dark:bg-white/5 border border-white/10 dark:border-white/10 text-[#1b1b18] dark:text-[#EDEDEC] focus:outline-none focus:ring-2 focus:ring-cyan-400/50 transition-all">
@@ -504,161 +300,88 @@
             </div>
         </div>
     </section>
+@endsection
 
-    <!-- Footer -->
-    <footer class="py-8 px-4 sm:px-6 lg:px-8 border-t border-white/10 dark:border-white/10 backdrop-blur-sm bg-white/5 dark:bg-white/5">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <p class="text-sm text-[#706f6c] dark:text-[#A1A09A]">© 2024 Grandkojo. All rights reserved.</p>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="https://github.com/Grandkojo" class="text-[#706f6c] dark:text-[#A1A09A] hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors transform hover:scale-110">
-                        <span class="sr-only">GitHub</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/ernest-essien-kojo" class="text-[#706f6c] dark:text-[#A1A09A] hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors transform hover:scale-110">
-                        <span class="sr-only">LinkedIn</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                    </a>
-                    <a href="https://x.com/grandkojo" class="text-[#706f6c] dark:text-[#A1A09A] hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors transform hover:scale-110">
-                        <span class="sr-only">Twitter</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Contact Form AJAX Handling
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const submitText = document.getElementById('submit-text');
+        const submitLoader = document.getElementById('submit-loader');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        const errorText = document.getElementById('error-text');
 
-    <!-- Add this before closing body tag -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // const slide1 = document.getElementById('slide1');
-            // const slide2 = document.getElementById('slide2');
-            // let currentSlide = 1;
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            // function switchSlide() {
-            //     if (currentSlide === 1) {
-            //         slide1.style.opacity = '0';
-            //         slide2.style.opacity = '1';
-            //         currentSlide = 2;
-            //     } else {
-            //         slide1.style.opacity = '1';
-            //         slide2.style.opacity = '0';
-            //         currentSlide = 1;
-            //     }
-            // }
+                // Show loader
+                submitBtn.disabled = true;
+                submitText.textContent = 'Sending...';
+                submitLoader.classList.remove('hidden');
+                
+                // Hide any existing messages
+                successMessage.classList.add('hidden');
+                errorMessage.classList.add('hidden');
 
-            // // Switch slides every 5 seconds
-            // setInterval(switchSlide, 5000);
+                // Get form data
+                const formData = new FormData(contactForm);
+                const object = Object.fromEntries(formData);
+                const json = JSON.stringify(object);
 
-            // // Add touch swipe functionality
-            // let touchStartX = 0;
-            // let touchEndX = 0;
-            
-            // document.getElementById('imageSlider').addEventListener('touchstart', e => {
-            //     touchStartX = e.changedTouches[0].screenX;
-            // });
+                // Send AJAX request
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: json,
+                    headers: {
+                         'Content-Type': 'application/json',
+                         'Accept': 'application/json'
+                    }
+                })
+                .then(async (response) => {
+                    if (!response.ok) {
+                        return response.json().then(data => {
+                            throw new Error(data.message || 'Something went wrong');
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Hide loader
+                    submitBtn.disabled = false;
+                    submitText.textContent = 'Send Message';
+                    submitLoader.classList.add('hidden');
 
-            // document.getElementById('imageSlider').addEventListener('touchend', e => {
-            //     touchEndX = e.changedTouches[0].screenX;
-            //     handleSwipe();
-            // });
-
-            // function handleSwipe() {
-            //     const swipeThreshold = 50;
-            //     if (touchEndX < touchStartX - swipeThreshold) {
-            //         // Swipe left
-            //         switchSlide();
-            //     }
-            //     if (touchEndX > touchStartX + swipeThreshold) {
-            //         // Swipe right
-            //         switchSlide();
-            //     }
-            // }
-
-            // Contact Form AJAX Handling
-            const contactForm = document.getElementById('contact-form');
-            const submitBtn = document.getElementById('submit-btn');
-            const submitText = document.getElementById('submit-text');
-            const submitLoader = document.getElementById('submit-loader');
-            const successMessage = document.getElementById('success-message');
-            const errorMessage = document.getElementById('error-message');
-            const errorText = document.getElementById('error-text');
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    // Show loader
-                    submitBtn.disabled = true;
-                    submitText.textContent = 'Sending...';
-                    submitLoader.classList.remove('hidden');
-                    
-                    // Hide any existing messages
-                    successMessage.classList.add('hidden');
-                    errorMessage.classList.add('hidden');
-
-                    // Get form data
-                    const formData = new FormData(contactForm);
-
-                    // Send AJAX request
-                    fetch('{{ route("send.email") }}', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.json().then(data => {
-                                throw new Error(data.message || 'Server error');
-                            });
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        // Hide loader
-                        submitBtn.disabled = false;
-                        submitText.textContent = 'Send Message';
-                        submitLoader.classList.add('hidden');
-
-                        if (data.success) {
-                            // Show success message
-                            successMessage.classList.remove('hidden');
-                            contactForm.reset();
-                            
-                            // Scroll to success message
-                            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        } else {
-                            // Show error message
-                            errorText.textContent = data.message || 'Something went wrong. Please try again.';
-                            errorMessage.classList.remove('hidden');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
+                    if (data) {
+                        // Show success message
+                        successMessage.classList.remove('hidden');
+                        contactForm.reset();
                         
-                        // Hide loader
-                        submitBtn.disabled = false;
-                        submitText.textContent = 'Send Message';
-                        submitLoader.classList.add('hidden');
-                        
+                        // Scroll to success message
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
                         // Show error message
-                        errorText.textContent = error.message || 'Network error. Please check your connection and try again.';
+                        errorText.textContent = data.message || 'Something went wrong. Please try again.';
                         errorMessage.classList.remove('hidden');
-                    });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    
+                    // Hide loader
+                    submitBtn.disabled = false;
+                    submitText.textContent = 'Send Message';
+                    submitLoader.classList.add('hidden');
+                    
+                    // Show error message
+                    errorText.textContent = error.message || 'Network error. Please check your connection and try again.';
+                    errorMessage.classList.remove('hidden');
                 });
-            }
-        });
-    </script>
-</body>
-</html> 
+            });
+        }
+    });
+</script>
+@endpush

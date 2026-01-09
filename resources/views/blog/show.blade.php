@@ -480,4 +480,12 @@
     }
 </script>
 @endpush
+push('meta')
+    <meta property="og:title" content="{{ $project->title }}">
+    <meta property="og:description" content="{{ Str::limit($project->description, 160) }}">
+    <meta property="og:image" content="{{ asset('images/project-imgs/' . $project->image) }}">
+    <meta name="twitter:title" content="{{ $project->title }}">
+    <meta name="twitter:description" content="{{ Str::limit($project->description, 160) }}">
+    <meta name="twitter:image" content="{{ asset('images/project-imgs/' . $project->image) }}">
+@endpush
 @endsection 

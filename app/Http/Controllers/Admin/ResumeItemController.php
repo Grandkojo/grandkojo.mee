@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ResumeItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ResumeItemController extends Controller
 {
     public function index()
     {
-        $resumeItems = ResumeItem::orderBy('order')->get();
+        // Cache admin resume items list for 30 minutes
+        $resumeItems = Cache::remember('admin.resume_items', 1800, function () {
+            return ResumeItem::orderBy('order')->get();
+        });
         return view('admin.resume.index', compact('resumeItems'));
     }
 
@@ -33,6 +37,10 @@ class ResumeItemController extends Controller
         ]);
 
         ResumeItem::create($validated);
+
+        // Invalidate caches
+        Cache::forget('portfolio.resume_items');
+        Cache::forget('admin.resume_items');
 
         return redirect()->route('admin.resume.index')
             ->with('success', 'Resume item created successfully.');
@@ -58,6 +66,10 @@ class ResumeItemController extends Controller
 
         $resumeItem->update($validated);
 
+        // Invalidate caches
+        Cache::forget('portfolio.resume_items');
+        Cache::forget('admin.resume_items');
+
         return redirect()->route('admin.resume.index')
             ->with('success', 'Resume item updated successfully.');
     }
@@ -65,6 +77,10 @@ class ResumeItemController extends Controller
     public function destroy(ResumeItem $resumeItem)
     {
         $resumeItem->delete();
+
+        // Invalidate caches
+        Cache::forget('portfolio.resume_items');
+        Cache::forget('admin.resume_items');
 
         return redirect()->route('admin.resume.index')
             ->with('success', 'Resume item deleted successfully.');

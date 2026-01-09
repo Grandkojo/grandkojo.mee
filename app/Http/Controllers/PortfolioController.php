@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Skill;
 use App\Models\ResumeItem;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Cache;
 use App\Mail\ContactForm;
 use App\Mail\ContactConfirmation;
 
@@ -14,19 +15,40 @@ class PortfolioController extends Controller
 {
     public function index()
     {
-        $skills = Skill::orderBy('order')->get();
-        $projects = Project::orderBy('order')->get();
-        $resumeItems = ResumeItem::orderBy('order')->get();
+        // Cache for 1 hour (3600 seconds)
+        $skills = Cache::remember('portfolio.skills', 3600, function () {
+            return Skill::orderBy('order')->get();
+        });
+        
+        $projects = Cache::remember('portfolio.projects', 3600, function () {
+            return Project::orderBy('order')->get();
+        });
+        
+        $resumeItems = Cache::remember('portfolio.resume_items', 3600, function () {
+            return ResumeItem::orderBy('order')->get();
+        });
         
         return view('portfolio', compact('skills', 'projects', 'resumeItems'));
     }
 
     public function showProject($id)
     {
-        $project = Project::findOrFail($id);
-        $projects = Project::orderBy('order')->get();
+        // Cache individual project for 1 hour
+        $project = Cache::remember("portfolio.project.{$id}", 3600, function () use ($id) {
+            return Project::findOrFail($id);
+        });
+        
+        // Cache projects list for 1 hour
+        $projects = Cache::remember('portfolio.projects', 3600, function () {
+            return Project::orderBy('order')->get();
+        });
         
         return view('projects.show', compact('project', 'projects'));
+    }
+
+    public function services()
+    {
+        return view('services');
     }
 
     public function sendEmail(Request $request)
